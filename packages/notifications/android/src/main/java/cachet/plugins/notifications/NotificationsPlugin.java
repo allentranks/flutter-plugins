@@ -103,8 +103,8 @@ public class NotificationsPlugin implements EventChannel.StreamHandler {
         final static String TAG = "NOTIFICATION_RECEIVER";
         @Override
         public void onReceive(Context context, Intent intent) {
-            String packageName = intent.getStringExtra(NotificationListener.NOTIFICATION_PACKAGE_NAME);
-            eventSink.success(packageName);
+            String contents = intent.getStringExtra(NotificationListener.NOTIFICATION_PACKAGE_NAME);
+            eventSink.success(contents);
         }
     }
 }

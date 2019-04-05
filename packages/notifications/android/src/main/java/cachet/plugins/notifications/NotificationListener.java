@@ -15,8 +15,12 @@ public class NotificationListener extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         String packageName = sbn.getPackageName();
+        String title = sbn.getNotification().extras.getString("android.title", "");
+        String content = sbn.getNotification().extras.getString("android.text", "");
+
         Intent intent = new  Intent(NOTIFICATION_INTENT);
-        intent.putExtra(NOTIFICATION_PACKAGE_NAME, packageName);
+
+        intent.putExtra(NOTIFICATION_PACKAGE_NAME, packageName + "$$" + title + "$$" + content);
         sendBroadcast(intent);
     }
 }

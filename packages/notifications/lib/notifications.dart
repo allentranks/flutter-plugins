@@ -17,20 +17,32 @@ class NotificationException implements Exception {
 }
 
 class NotificationEvent {
+  String _rawContent;
+
   String _packageName;
+  String _title;
+  String _content;
   DateTime _timeStamp;
 
-  NotificationEvent(this._packageName) {
+  NotificationEvent(this._rawContent) {
+    List<String> contents = _rawContent.split("\$\$");
+    _packageName = contents[0];
+    _title = contents[1];
+    _content = contents[2];
     _timeStamp = DateTime.now();
   }
 
+  String get rawContent => _rawContent;
+  String get title => _title;
+  String get content => _content;
   String get packageName => _packageName;
+
 
   DateTime get timeStamp => _timeStamp;
 
   @override
   String toString() {
-    return "[$packageName sent notification @ $timeStamp";
+    return "[$title] sent '$content' from $packageName @ $timeStamp";
   }
 }
 
